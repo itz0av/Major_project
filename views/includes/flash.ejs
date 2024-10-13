@@ -1,0 +1,35 @@
+<!-- <h1>Flash message for success</h1> -->
+<% if(success && success.length) { %>
+<style>
+    #flash-m{
+        margin-top: 1rem !important;
+        background-color: rgba(230, 230, 230, 0.874) !important;
+        backdrop-filter: blur(20) !important;
+    }
+</style>
+<div class="alert  alert-success alert-dismissible fade show col-6 offset-3" id="flash-m" role="alert">
+    <%= success %>
+    <button 
+        type="button" 
+        class="btn-close" 
+        data-bs-dismiss="alert" 
+        aria-label="Close">
+    </button>
+</div>
+
+<% } %>
+
+<!-- <h1>Flash message for success</h1> -->
+<% if(error && error.length) { %>
+
+    <div class="alert  alert-danger alert-dismissible fade show col-6 offset-3"  id="flash-m"role="alert">
+        <%= error %>
+        <button 
+            type="button" 
+            class="btn-close" 
+            data-bs-dismiss="alert" 
+            aria-label="Close">
+        </button>
+    </div>
+    
+    <% } %>

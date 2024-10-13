@@ -1,0 +1,190 @@
+<%layout("/layouts/boilerplate")%>
+
+<div class="homepage">
+  <div class="filter-options " id="filter_options">
+    <button class="arrow-left" id="first-arrow">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+    <div class="filters" id="listing-filters">
+      <div class="filter-box" id="filter_box">
+        <div class="filter">
+          <i class="fa-solid fa-fire icon"></i>
+          <p>Trending</p>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-bed icon"></i>
+          <p>Rooms</p>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-hotel icon"></i>
+          <p>Hotels</p>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-mountain-sun icon"></i>
+          <p>Mountains</p>
+        </div>
+        <div class="filter">
+          <i class="fa-brands fa-fort-awesome icon"></i>
+          <p>castles</p>
+        </div>
+        <div class="filter">
+          <i class="fa-brands fa-pagelines icon"></i>
+          <p>Farms</p>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-snowflake icon"></i>
+          <p>arctic</p>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-person-swimming icon"></i>
+          <p>Swim</p>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-umbrella-beach icon"></i>
+          <p>Beach</p>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-campground icon"></i>
+          <p>Camp</p>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-landmark icon"></i>
+          <p>historical</p>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-sailboat icon"></i>
+          <p>Boat</p>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-tree icon"></i>
+          <p>TreeHouse</p>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-campground icon"></i>
+          <p>Camp</p>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-umbrella-beach icon"></i>
+          <p>Beach</p>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-campground icon"></i>
+          <p>Camp</p>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-landmark icon"></i>
+          <p>historical</p>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-sailboat icon"></i>
+          <p>Boat</p>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-tree icon"></i>
+          <p>TreeHouse</p>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-campground icon"></i>
+          <p>Camp</p>
+        </div>
+      </div>
+    </div>
+    <button class="arrow-right" id="sec-button">
+      <i class="fa-solid fa-arrow-right"></i>
+    </button>
+    <div class="tax-toggle" id="toggle-hide">
+      <label class="form-check-label" for="flexSwitchCheckDefault"
+        >Display with Taxes &nbsp;</label
+      >
+      <div class="form-check form-switch">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          id="flexSwitchCheckDefault"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    class="row row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-xs-1 mt-4"
+    style="padding-right: 5%; padding-left: 5%"
+    id="listing"
+  >
+    <%for(let listing of allListings){ %>
+    <a href="/listings/<%=listing._id%>" class="listing-link">
+      <div class="card col">
+        <div class="card-img-overlay"></div>
+        <img
+          src="<%= listing.image.url %>"
+          class="card-img-top"
+          alt="listings.image"
+          style="height: 20rem"
+        />
+
+        <div class="card-body">
+          <p class="card-text">
+            <br />
+            <b><%= listing.title %></b><br />
+            <i class="Price">
+              &#8377;<%= listing.price.toLocaleString("en-IN")%>/night
+              &nbsp;&nbsp;</i
+            >
+            <i class="tax-info"
+              >&#8377;<%= (listing.price * 1.18).toLocaleString("en-IN")
+              %>/night with tax</i
+            >
+          </p>
+        </div>
+      </div>
+    </a>
+    <%}%>
+  </div>
+  <!-- <form method="GET" action="/listings/new">
+        <button>Create New Listing</button>
+    </form> -->
+</div>
+
+
+<script>
+const right = document.querySelector("#sec-button");
+const left = document.querySelector("#first-arrow");
+const slider = document.querySelector(".filter-box");
+const icon = document.querySelector(".icon");
+
+let slideNumber = 1;
+const length = 10;
+console.log(length);
+
+const nextSlide = () => {
+  console.log("working");
+  slider.style.transform = `translateX(-${slideNumber * 50}px)`;
+  slideNumber++;
+  console.log(slideNumber);
+};
+const getFirstSlide = () => {
+  slider.style.transform = `translateX(0px)`;
+  slideNumber = 1;
+};
+right.addEventListener("click", () => {
+  console.log("working");
+  slideNumber < length ? nextSlide(): getFirstSlide();
+});
+nextSlide();
+
+// leftSlide
+
+const prevSlide = () => {
+  console.log("working");
+  slider.style.transform = `translateX(-${(slideNumber - 2) * 50}px)`;
+  slideNumber--;
+};
+const getLastSlide = () => {
+  slider.style.transform = `translateX(-${(length - 1) * 50}px)`;
+  slideNumber = length;
+};
+left.addEventListener("click", () => {
+    console.log("working");
+  prevSlide();
+});
+</script>
